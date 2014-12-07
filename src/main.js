@@ -1,4 +1,3 @@
-/*
 (function() {
 	// Creates an object based in the HTML Element prototype
 	var el = Object.create(HTMLElement.prototype);
@@ -12,7 +11,7 @@
 		// ...
 		options.el = this;
 		// instantiate view
-		view = new APP.UI.Component( options );
+		view = new APP.FX.Zoom(options);
 
 	};
 
@@ -27,8 +26,9 @@
 	// Fires when an attribute was added, removed, or updated
 	el.attributeChangedCallback = function(attr, oldVal, newVal) {};
 
-	document.registerElement('ui-component', {
-		prototype: el
+	document.registerElement('fx-zoom', {
+		prototype: el,
+		extends: 'div'
 	});
+
 }());
-*/
