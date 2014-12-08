@@ -8,21 +8,50 @@
 
 	var View = Parent.extend({
 
-		options: {},
-
-		events: {
-			"click .map": "zoomOut",
-			"click .stage": "zoomIn",
+		options: {
 		},
 
+		state: {
+			zoom: false
+		},
+
+		initialize: function( options ){
+			// add class to element
+			$(this.el).addClass("fx-zoom");
+			//
+			Parent.prototype.initialize.call( this, options );
+		},
+
+		// states
 		zoomOut: function( e ){
-			console.log("Hey 1");
-			$(e.target).addClass("fx-zoom-out").siblings().removeClass("fx-zoom-in");
+			$(this.el).removeClass("fx-zoom-in").addClass("fx-zoom-out");
+			this.state.zoom = "out";
 		},
 
 		zoomIn: function( e ){
-			console.log("Hey 2");
-			$(e.target).addClass("fx-zoom-in").siblings().removeClass("fx-zoom-out");
+			//$(e.target)
+			$(this.el).removeClass("fx-zoom-out").addClass("fx-zoom-in");
+			this.state.zoom = "in";
+		},
+
+		zoomRestore: function(){
+			$(this.el).removeClass("fx-zoom-out").removeClass("fx-zoom-in");
+			this.state.zoom = false;
+		},
+
+		// events
+		updateState: function( type ){
+			switch( type ){
+				case "zoom-in":
+					this.zoomIn();
+				break;
+				case "zoom-out":
+					this.zoomOut();
+				break;
+				default:
+					this.zoomRestore();
+				break;
+			}
 		}
 	});
 
