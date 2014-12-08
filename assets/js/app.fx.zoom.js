@@ -18,6 +18,12 @@
 		initialize: function( options ){
 			// add class to element
 			$(this.el).addClass("fx-zoom");
+			// update state
+			if( options.state ){
+				var state = options.state;
+				this.updateState( state );
+				delete options.state;
+			}
 			//
 			Parent.prototype.initialize.call( this, options );
 		},

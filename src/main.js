@@ -7,6 +7,7 @@
 
 		// gather options
 		var options = {};
+		if( this.attributes.state ) options.state = this.attributes.state.value;
 		// ...
 		options.el = this;
 		// instantiate view
