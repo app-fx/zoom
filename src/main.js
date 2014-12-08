@@ -1,7 +1,6 @@
 (function() {
 	// Creates an object based in the HTML Element prototype
 	var el = Object.create(HTMLElement.prototype);
-	var view;
 
 	// Fires when an instance of the element is created
 	el.createdCallback = function() {
@@ -11,7 +10,7 @@
 		// ...
 		options.el = this;
 		// instantiate view
-		view = new APP.FX.Zoom(options);
+		this.view = new APP.FX.Zoom(options);
 
 	};
 
@@ -20,11 +19,25 @@
 
 	// Fires when an instance was removed from the document
 	el.detachedCallback = function() {
-		view.destroy();
+		this.view.destroy();
 	};
 
 	// Fires when an attribute was added, removed, or updated
-	el.attributeChangedCallback = function(attr, oldVal, newVal) {};
+	el.attributeChangedCallback = function(attr, oldVal, newVal) {
+		// redirect basted on attribute
+		switch( attr ){
+			case "state":
+				var state = false;
+				// filter state of interest
+				if( newVal.indexOf("zoom-in") > -1 ) state = "zoom-in";
+				if( newVal.indexOf("zoom-out") > -1 ) state = "zoom-out";
+				this.view.updateState( state );
+			break;
+			default:
+				// do nothing by default
+			break;
+		}
+	};
 
 	document.registerElement('fx-zoom', {
 		prototype: el,
