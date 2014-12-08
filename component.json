@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"main": "index.html",
 	"keywords": [
-			"app-fx", "web-components"
+			"zoom", "app-fx", "web-components"
 	],
 	"ignore": [
 			"**/.*",
