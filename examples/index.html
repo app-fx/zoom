@@ -33,7 +33,7 @@
 			text-align: center;
 		}
 
-		.map {
+		.one {
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -45,7 +45,7 @@
 
 		}
 
-		.stage {
+		.two {
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -55,17 +55,52 @@
 			background-repeat: no-repeat;
 			background-size: cover;
 		}
+
+		button {
+			position: absolute;
+			top: 0;
+			padding: 12px;
+		}
 	</style>
 
 </head>
 <body>
 
 <!-- Custom Element -->
-<div class="main" is="fx-zoom">
-	<div class="map fx-zoom"></div>
-	<div class="stage fx-zoom"></div>
+<div class="main" >
+	<div is="fx-zoom" class="one" state="zoom-in"></div>
+	<div is="fx-zoom" class="two"></div>
 </div>
 
+
+<button>Toggle Zoom</button>
+
+
+
+<script>
+	// on load we see the second cat
+	var cat = 2;
+	$("button").click(function(){
+		if( cat == 2 ){
+			showOne();
+		} else {
+			showTwo();
+		}
+	});
+
+	function showOne(){
+		$(".one").attr("state", "");
+		$(".two").attr("state", "zoom-out");
+		cat = 1;
+	}
+
+	function showTwo(){
+		$(".one").attr("state", "zoom-in");
+		$(".two").attr("state", "");
+		cat = 2;
+	}
+
+</script>
 
 </body>
 </html>
